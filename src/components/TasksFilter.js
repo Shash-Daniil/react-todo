@@ -1,19 +1,26 @@
 import React from 'react'
 
-let TasksFilter = () => {
-    return (
-        <ul class="filters">
-            <li>
-              <button class="selected">All</button>
-            </li>
-            <li>
-              <button>Active</button>
-            </li>
-            <li>
-              <button>Completed</button>
-            </li>
-        </ul>
-    )
-}
+export default class TasksFilter extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selected: 'All'
+    }
+  }
 
-export default TasksFilter
+  render() {
+    return (
+      <ul className="filters">
+          <li>
+            <button onClick={() => this.props.onFilterChange('All')}>All</button>
+          </li>
+          <li>
+            <button onClick={() => this.props.onFilterChange('Active')}>Active</button>
+          </li>
+          <li>
+            <button onClick={() => this.props.onFilterChange('Completed')}>Completed</button>
+          </li>
+      </ul>
+    )
+  }
+}

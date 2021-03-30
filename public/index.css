@@ -4,6 +4,10 @@ body {
 	padding: 0;
 }
 
+form {
+	margin: 0
+}
+
 button {
 	margin: 0;
 	padding: 0;
