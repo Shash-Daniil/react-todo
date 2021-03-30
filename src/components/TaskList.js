@@ -2,8 +2,8 @@ import React from 'react'
 import Task from './Task'
 
 
-const TaskList = ({ tasksArr, onDeleteTask, onComplete, filter, onEditTask, onEditTaskText, onEditTaskTextSubmit}) => {
-    const tasks = tasksArr.map(elem => {
+let TaskList = ({ tasksArr, onDeleteTask, onComplete, filter, onEditTask, onEditTaskText, onEditTaskTextSubmit}) => {
+    let tasks = tasksArr.map(elem => {
         if (filter === 'All' || elem.status === filter.toLowerCase())
             {return <Task id={elem.id} key={elem.id} taskOptions={elem} 
             onDeleteTask={ () => onDeleteTask(elem.id) }
