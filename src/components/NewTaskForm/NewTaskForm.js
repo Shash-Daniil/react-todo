@@ -5,7 +5,7 @@ import './NewTaskForm.css';
 
 export default class NewTaskForm extends React.Component {
   static defaultProps = {
-    onAddTask: () => console.log('onAddTask func'),
+    onAddTask: () => true,
   };
 
   static propTypes = {
@@ -18,15 +18,15 @@ export default class NewTaskForm extends React.Component {
       label: '',
     };
 
-    this.onLabelChange = (e) => {
+    this.onLabelChange = (event) => {
       this.setState({
-        label: e.target.value,
+        label: event.target.value,
       });
     };
-    this.onSubmit = (e) => {
+    this.onSubmit = (event) => {
       const { label } = this.state;
       const { onAddTask } = this.props;
-      e.preventDefault();
+      event.preventDefault();
       onAddTask(label);
       this.setState({ label: '' });
     };

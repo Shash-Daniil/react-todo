@@ -18,8 +18,8 @@ const Footer = ({ activeCount, onClearCompleted, onFilterChange, filter }) => (
 
 Footer.defaultProps = {
   activeCount: 9999,
-  onClearCompleted: () => console.log('clear completed'),
-  onFilterChange: () => console.log('filter change'),
+  onClearCompleted: () => true,
+  onFilterChange: () => true,
 };
 
 Footer.propTypes = {

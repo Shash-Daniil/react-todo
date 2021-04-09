@@ -111,7 +111,7 @@ class App extends React.Component {
 
   render() {
     const { tasksArr, filter } = this.state;
-    const activeCount = tasksArr.reduce((a, e) => (e.status === 'active' ? a + 1 : a), 0);
+    const activeCount = tasksArr.reduce((acc, elem) => (elem.status === 'active' ? acc + 1 : acc), 0);
     return (
       <section className="todoapp">
         <NewTaskForm onAddTask={this.onAddTask} />

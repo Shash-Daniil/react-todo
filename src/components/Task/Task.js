@@ -35,7 +35,7 @@ export default class Task extends React.Component {
         </div>
         {taskOptions.status === 'editing' ? (
           <form onSubmit={onEditTaskTextSubmit}>
-            <input onChange={(e) => onEditTaskText(id, e.target.value)} className="edit" value={taskOptions.text} />
+            <input onChange={(evt) => onEditTaskText(id, evt.target.value)} className="edit" value={taskOptions.text} />
           </form>
         ) : null}
       </li>

@@ -31,7 +31,7 @@ TaskList.propTypes = {
   onComplete: PropTypes.func.isRequired,
   filter: PropTypes.string,
   onEditTask: PropTypes.func.isRequired,
-  onEditTaskText: PropTypes.string.isRequired,
+  onEditTaskText: PropTypes.func.isRequired,
   onEditTaskTextSubmit: PropTypes.func.isRequired,
 };
 
