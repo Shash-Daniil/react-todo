@@ -2,7 +2,8 @@
   "extends": [
     "airbnb",
     "airbnb/hooks",
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "prettier"
   ],
   "plugins": ["react"],
   "parser": "babel-eslint",
@@ -23,6 +24,7 @@
     "jsx-a11y/label-has-associated-control": [ "error", {
       "assert": "either"
     }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/state-in-constructor": ["off"],
     "react/jsx-props-no-spreading": ["off"],
     "react/static-property-placement": "off"
