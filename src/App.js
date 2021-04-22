@@ -10,9 +10,9 @@ class App extends React.Component {
 
     this.state = {
       tasksArr: [
-        { id: 1, status: 'completed', text: 'УМРИ', timerFlag: false },
-        { id: 2, status: 'completed', text: 'НАХУЙ', timerFlag: false },
-        { id: 3, status: 'active', text: 'ДОЛБАЕБ', timerFlag: false },
+        { id: 1, status: 'completed', text: 'one', timerFlag: false },
+        { id: 2, status: 'completed', text: 'two', timerFlag: false },
+        { id: 3, status: 'active', text: 'three', timerFlag: false },
       ],
       filter: 'All',
       editingTaskStatus: null,
