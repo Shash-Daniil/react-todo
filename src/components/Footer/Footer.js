@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TasksFilter from '../TasksFilter';
 
-import './Footer.css';
-
 const Footer = ({ activeCount, onClearCompleted, onFilterChange, filter }) => (
   <footer className="footer">
     <span className="todo-count">

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './NewTaskForm.css';
-
 export default class NewTaskForm extends React.Component {
   static defaultProps = {
     onAddTask: () => true,
@@ -16,34 +14,61 @@ export default class NewTaskForm extends React.Component {
     super();
     this.state = {
       label: '',
+      min: '',
+      sec: '',
     };
 
-    this.onLabelChange = (event) => {
+    this.onLabelChange = (event, stateValue) => {
       this.setState({
-        label: event.target.value,
+        [stateValue]: event.target.value,
       });
     };
-    this.onSubmit = (event) => {
-      const { label } = this.state;
-      const { onAddTask } = this.props;
+
+    this.onLabelSubmit = (event) => {
       event.preventDefault();
-      onAddTask(label);
-      this.setState({ label: '' });
+      const { label, min, sec } = this.state;
+      const { onAddTask } = this.props;
+      let timerFlag = false;
+
+      if (min.length !== 0 || sec.length !== 0) {
+        timerFlag = true;
+      }
+
+      onAddTask(label, min, sec, timerFlag);
+      this.setState({ label: '', min: '', sec: '' });
+    };
+
+    this.onKeyPress = (event) => {
+      if (event.key === 'Enter') {
+        this.onLabelSubmit(event);
+      }
     };
   }
 
+  /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   render() {
-    const { label } = this.state;
-
+    const { label, min, sec } = this.state;
     return (
       <header className="header">
         <h1>todos</h1>
-        <form onSubmit={this.onSubmit}>
+        <form onKeyPress={this.onKeyPress} className="new-todo-form">
           <input
             className="new-todo"
             placeholder="What needs to be done?"
-            onChange={this.onLabelChange}
+            onChange={(event) => this.onLabelChange(event, 'label')}
             value={label}
+          />
+          <input
+            className="new-todo-form__timer"
+            placeholder="Min"
+            onChange={(event) => this.onLabelChange(event, 'min')}
+            value={min}
+          />
+          <input
+            className="new-todo-form__timer"
+            placeholder="Sec"
+            onChange={(event) => this.onLabelChange(event, 'sec')}
+            value={sec}
           />
         </form>
       </header>

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-
-import './Task.css';
+import Timer from '../Timer';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Task extends React.Component {
@@ -27,8 +26,11 @@ export default class Task extends React.Component {
             <input className="toggle" type="checkbox" onClick={onComplete} />
           )}
           <label>
-            <span className="description">{taskOptions.text}</span>
-            <span className="created">{formatDistanceToNow(new Date(), { includeSeconds: true })}</span>
+            <span className="title">{taskOptions.text}</span>
+            {taskOptions.timerFlag && taskOptions.status === 'active' ? (
+              <Timer min={taskOptions.min} sec={taskOptions.sec} />
+            ) : null}
+            <span className="description">{formatDistanceToNow(new Date(), { includeSeconds: true })}</span>
           </label>
           <button label="edit-btn" type="button" className="icon icon-edit" onClick={onEditTask} />
           <button label="delete-btn" type="button" className="icon icon-destroy" onClick={onDeleteTask} />

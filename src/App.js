@@ -10,12 +10,9 @@ class App extends React.Component {
 
     this.state = {
       tasksArr: [
-        { id: 1, status: 'completed', text: 'Completed task' },
-        { id: 2, status: 'completed', text: 'lol' },
-        { id: 3, status: 'active', text: 'tasdasdasd' },
-        { id: 4, status: 'active', text: 'task6' },
-        { id: 5, status: 'active', text: 'Active task2' },
-        { id: 6, status: 'active', text: 'Active task6' },
+        { id: 1, status: 'completed', text: 'УМРИ', timerFlag: false },
+        { id: 2, status: 'completed', text: 'НАХУЙ', timerFlag: false },
+        { id: 3, status: 'active', text: 'ДОЛБАЕБ', timerFlag: false },
       ],
       filter: 'All',
       editingTaskStatus: null,
@@ -55,8 +52,8 @@ class App extends React.Component {
       });
     };
 
-    this.onAddTask = (text) => {
-      const newTask = { id: (this.idMax += 1), status: 'active', text };
+    this.onAddTask = (text, min, sec, timerFlag) => {
+      const newTask = { id: (this.idMax += 1), status: 'active', text, min, sec, timerFlag };
       this.setState(({ tasksArr }) => {
         const newArr = [...tasksArr, newTask];
         return {

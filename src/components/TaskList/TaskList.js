@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Task from '../Task';
 
-import './TaskList.css';
-
 const TaskList = ({ tasksArr, onDeleteTask, onComplete, filter, onEditTask, onEditTaskText, onEditTaskTextSubmit }) => {
   const tasks = tasksArr.map((elem) => {
     if (filter === 'All' || elem.status === filter.toLowerCase()) {
