@@ -2,6 +2,7 @@ import React from 'react';
 import TaskList from './components/TaskList';
 import Footer from './components/Footer';
 import NewTaskForm from './components/NewTaskForm';
+import { ACTIVE, COMPLETED, EDITING } from './const_strings/statuses';
 
 class App extends React.Component {
   constructor() {
@@ -10,9 +11,9 @@ class App extends React.Component {
 
     this.state = {
       tasksArr: [
-        { id: 1, status: 'completed', text: 'one', timerFlag: false },
-        { id: 2, status: 'completed', text: 'two', timerFlag: false },
-        { id: 3, status: 'active', text: 'three', timerFlag: false },
+        { id: 1, status: COMPLETED, text: 'one', timerFlag: false },
+        { id: 2, status: COMPLETED, text: 'two', timerFlag: false },
+        { id: 3, status: ACTIVE, text: 'three', timerFlag: false },
       ],
       filter: 'All',
       editingTaskStatus: null,
@@ -20,16 +21,15 @@ class App extends React.Component {
 
     this.onEditTask = (id) => {
       this.setState(({ tasksArr, editingTaskStatus }) => {
-        const tmp = [...tasksArr];
         const index = tasksArr.findIndex((el) => el.id === id);
         const newArr = [...tasksArr];
         const { status } = newArr[index];
 
-        if (tmp.findIndex((el) => el.status === 'editing') !== -1) {
-          tmp[tmp.findIndex((el) => el.status === 'editing')].status = editingTaskStatus;
+        if (newArr.findIndex((el) => el.status === EDITING) !== -1) {
+          newArr[newArr.findIndex((el) => el.status === EDITING)].status = editingTaskStatus;
         }
 
-        newArr[index].status = 'editing';
+        newArr[index].status = EDITING;
 
         return {
           tasksArr: newArr,
@@ -46,14 +46,14 @@ class App extends React.Component {
 
     this.onClearCompleted = () => {
       const { tasksArr } = this.state;
-      const newArr = tasksArr.filter((item) => item.status !== 'completed');
+      const newArr = tasksArr.filter((item) => item.status !== COMPLETED);
       this.setState({
         tasksArr: newArr,
       });
     };
 
     this.onAddTask = (text, min, sec, timerFlag) => {
-      const newTask = { id: (this.idMax += 1), status: 'active', text, min, sec, timerFlag };
+      const newTask = { id: (this.idMax += 1), status: ACTIVE, text, min, sec, timerFlag };
       this.setState(({ tasksArr }) => {
         const newArr = [...tasksArr, newTask];
         return {
@@ -76,7 +76,7 @@ class App extends React.Component {
       this.setState(({ tasksArr }) => {
         const index = tasksArr.findIndex((el) => el.id === id);
         const newArr = [...tasksArr];
-        newArr[index].status = newArr[index].status === 'completed' ? 'active' : 'completed';
+        newArr[index].status = newArr[index].status === COMPLETED ? ACTIVE : COMPLETED;
         return {
           tasksArr: newArr,
         };
@@ -108,7 +108,7 @@ class App extends React.Component {
 
   render() {
     const { tasksArr, filter } = this.state;
-    const activeCount = tasksArr.reduce((acc, elem) => (elem.status === 'active' ? acc + 1 : acc), 0);
+    const activeCount = tasksArr.reduce((acc, elem) => (elem.status === ACTIVE ? acc + 1 : acc), 0);
     return (
       <section className="todoapp">
         <NewTaskForm onAddTask={this.onAddTask} />

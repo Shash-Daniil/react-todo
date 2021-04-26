@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import Timer from '../Timer';
+import { ACTIVE, COMPLETED } from '../../const_strings/statuses';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Task extends React.Component {
+  /* eslint-disable react/destructuring-assignment */
+  state = {
+    min: this.props.taskOptions.min,
+    sec: this.props.taskOptions.sec,
+  };
+
   static propTypes = {
     id: PropTypes.number.isRequired,
     taskOptions: PropTypes.oneOfType([PropTypes.object]).isRequired,
@@ -17,19 +24,18 @@ export default class Task extends React.Component {
 
   render() {
     const { taskOptions, onComplete, onEditTask, onDeleteTask, onEditTaskTextSubmit, onEditTaskText, id } = this.props;
+    const { min, sec } = this.state;
     return (
       <li className={taskOptions.status}>
         <div className="view">
-          {taskOptions.status === 'completed' ? (
+          {taskOptions.status === COMPLETED ? (
             <input className="toggle" type="checkbox" defaultChecked onClick={onComplete} />
           ) : (
             <input className="toggle" type="checkbox" onClick={onComplete} />
           )}
           <label>
             <span className="title">{taskOptions.text}</span>
-            {taskOptions.timerFlag && taskOptions.status === 'active' ? (
-              <Timer min={taskOptions.min} sec={taskOptions.sec} />
-            ) : null}
+            {taskOptions.timerFlag && taskOptions.status === ACTIVE ? <Timer min={min} sec={sec} /> : null}
             <span className="description">{formatDistanceToNow(new Date(), { includeSeconds: true })}</span>
           </label>
           <button label="edit-btn" type="button" className="icon icon-edit" onClick={onEditTask} />

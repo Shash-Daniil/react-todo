@@ -1,34 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Timer = (props) => {
-  const { min, sec } = props;
+  let { min, sec } = props;
+
+  if (sec >= 60) {
+    const minutes = (sec / 60).toFixed(0);
+    const seconds = sec % 60;
+    min += minutes;
+    sec = seconds;
+  }
+
   const [minutes, setMinutes] = useState(Number(min));
   const [seconds, setSeconds] = useState(Number(sec));
-  const [intervalId, setIntervalId] = useState();
+  const [intervalId, setIntervalId] = useState('');
 
+  /* eslint-disable no-param-reassign */
   const startTimer = (mins, secs) => {
-    clearInterval(intervalId);
-    let mins1 = mins;
-    let secs1 = secs;
-    const kek = setInterval(() => {
-      if (secs1 === 0) {
-        if (mins1 === 0) {
-          clearInterval(intervalId);
-          return;
+    if (!intervalId) {
+      const timer = setInterval(() => {
+        if (secs === 0 && mins === 0) {
+          console.log('cleared');
+          clearInterval(timer);
+          setIntervalId('');
         }
-        mins1 -= 1;
-        secs1 = 60;
-        setSeconds(60);
-        setMinutes(mins1);
-      }
-      setSeconds((old) => old - 1);
-      secs1 -= 1;
-    }, 1000);
-    setIntervalId(kek);
+        if (secs === 0) {
+          if (mins === 0) {
+            clearInterval(intervalId);
+            return;
+          }
+          mins -= 1;
+          secs = 60;
+          setSeconds(60);
+          setMinutes(mins);
+        }
+        secs -= 1;
+        setSeconds(secs);
+      }, 1000);
+      setIntervalId(timer);
+    }
   };
 
-  const stopTimer = () => clearInterval(intervalId);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => clearInterval(intervalId), []);
+
+  const stopTimer = () => {
+    clearInterval(intervalId);
+    setIntervalId('');
+  };
 
   return (
     <span className="description">
