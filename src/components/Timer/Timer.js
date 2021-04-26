@@ -5,9 +5,10 @@ const Timer = (props) => {
   let { min, sec } = props;
 
   if (sec >= 60) {
+    min = Number(min);
     const minutes = (sec / 60).toFixed(0);
     const seconds = sec % 60;
-    min += minutes;
+    min += Number(minutes);
     sec = seconds;
   }
 
