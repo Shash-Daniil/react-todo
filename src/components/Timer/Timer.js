@@ -21,7 +21,6 @@ const Timer = (props) => {
     if (!intervalId) {
       const timer = setInterval(() => {
         if (secs === 0 && mins === 0) {
-          console.log('cleared');
           clearInterval(timer);
           setIntervalId('');
         }
